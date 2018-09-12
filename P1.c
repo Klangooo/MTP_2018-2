@@ -1,7 +1,7 @@
 //Felipe Soares Pereira
 //11811ECP014
 
-//Automato Finito p/ verificar se um número é multipl de 3
+//Automato Finito p/ verificar se um nÃºmero Ã© multipl de 3
 
 #include <stdio.h>
 
