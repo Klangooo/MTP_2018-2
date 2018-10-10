@@ -34,7 +34,7 @@ int bindec(char bits[]){
 		if(bits[i]=='1')
 			soma = soma+bits[i]*pow2(i);
 	}
-	return soma/49;
+	return soma/49+1;
 }
 
 void decbin (int num)
@@ -66,7 +66,7 @@ int main(){
 	switch(e)
 	{
 		case 1:
-			printf("\nDigite o numero: ");
+			printf("Digite o numero: ");
 			scanf("%s", bits);
 			getchar();
 			printf("\nResultado: %i", bindec(bits));
