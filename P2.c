@@ -1,21 +1,23 @@
-//Felipe Soares Pereira
-//11811ECP014
+/* P2.c */
+/* Felipe Soares Pereira */
+/* 11811ECP014 */
 
 #include <stdio.h>
 
-int pow2(int i){
-	int resp=1, j;
-	for(j=0; j<i; j++)
-		resp= resp*2;
-	return resp;
+int potencia (int n1, int n2)
+{
+	int i, res = 1;
+	for (i=0; i<n2; i++)
+		res = res * n1;
+	return res;
 }
 
 void inverter (char vet[])
 {
-	int aux = 0, i, cont = 0, total = 0;
+	int aux = 0, i, cont = 0, conttotal = 0;
 	for (i=0; vet[i] != '\0'; i++)
 		cont++;
-	total = cont;
+	conttotal = cont;
 	cont--;
 	for (i=0; i<cont; i++)
 	{
@@ -24,95 +26,102 @@ void inverter (char vet[])
 		vet[cont] = aux;
 		cont--;
 	}
-	vet[total] = '\0';
+	vet[conttotal] = '\0';
 }
 
-int bindec(char bits[]){
-	inverter(bits);
-	int i, soma, j;
-	for(i=0; bits[i]!= '\0' ; i++){
-		if(bits[i]=='1')
-			soma = soma+bits[i]*pow2(i);
-	}
-	return soma/49+1;
-}
-
-void decbin (int num)
+int bipd (char num[])
 {
-	int vet_bin[256], i, j, resto, cont=0;
-	resto = num;
-	for (i=0; cont<1 ; i++)
+	inverter(num);
+	int i, soma = 0;
+	for (i = 0; num[i] != '\0'; i++)
+		if (num[i] == '1')
+			soma = soma + num[i] * potencia(2, i);
+	return soma/49;
+}
+
+void dpbi (int num)
+{
+	int vet[256], i, j, res, flag=0;
+	res = num;
+	for (i=0; flag<1 ; i++)
 	{
-		vet_bin[i] = resto % 2;
-		resto = resto/2;
-		if (resto == 1 || resto == 0)
+		vet[i] = res % 2;
+		res = res/2;
+		if (res == 1 || res == 0)
 		{
-			vet_bin[i+1] = resto;
+			vet[i+1] = res;
 			j=i+1;
-			cont++;
+			flag++;
 		}
 	}
-	printf ("Resultado: ");
+	printf ("O valor em binario eh ");
 	for (i=j; i>=0; i--)
-		printf ("%d", vet_bin[i]);
+		printf ("%d", vet[i]);
 }
 
-int main(){
-	int e, num;
-	char bits[256];
-	printf("1. Binario para Decimal\n2. Binario para Hexadecimal\n3. Hexadecimal para Decimal\n4. Hexadecimal para Binario\n5. Decimal para Binario\n6. Decimal para Hexadecimal\n7. Octal para Decimal\n8. Decimal para Octal\n\nEscolha: ");
-	scanf("%i", &e);
-	getchar();
-	switch(e)
+
+int main()
+{
+	int menu;
+	char num[256];
+	printf ("1) Binario para decimal \n2) Binario para hexadecimal \
+	\n3) Hexadecimal para decimal \n4) Hexadecimal para binario \n5) Decimal para binario \
+	\n6) Decimal para hexadecimal \n7) Octal para decimal \n8) Decimal para octal");
+	printf ("\n\nDigite sua opcao: ");
+	scanf ("%d", &menu);
+	if(op==1)
 	{
-		case 1:
-			printf("Digite o numero: ");
-			scanf("%s", bits);
-			getchar();
-			printf("\nResultado: %i", bindec(bits));
-			break;
-		case 2:
-			printf ("Digite o numero: ");
-			scanf ("%s", bits);
-			getchar();
-			printf ("\nResultado: %x", bindec(bits));
-			break;
-		case 3:
-			printf ("Digite o numero: ");
-			scanf ("%x", &num);
-			getchar();
-			printf ("\nResultado: %d", num);
-			break;
-		case 4:
-			printf ("Digite o numero: ");
-			scanf ("%x", &num);
-			getchar();
-			decbin(num);
-			break;
-		case 5:
-			printf ("Digite o numero: ");
-			scanf("%d", &num);
-			getchar();
-			decbin(num);
-			break;
-		case 6:
-			printf ("Digite o numero: ");
-			scanf("%d", &num);
-			getchar();
-			printf ("\nResultado: %x", num);
-			break;
-		case 7:
-			printf ("Digite o numerol: ");
-			scanf("%o", &num);
-			getchar();
-			printf("\nResultado: %d", num);
-			break;
-		case 8:
-			printf ("Digite o numero: ");
-			scanf("%d", &num);
-			getchar();
-			printf ("\nResultado: %o", num);
-			break;
+		printf ("Digite o numero em binario: ");
+		scanf ("%s", num);
+		printf ("O valor em decimal eh %d", bipd(num));
+	}
+	if(menu==2)
+	{
+		printf ("Digite o numero em binario: ");
+		scanf ("%s", num);
+		printf ("O valor em hexadecimal eh %x", bipd(num));
+	}
+	if(menu==3)
+	{
+		int(num);
+		printf ("Digite o numero em hexadecimal: ");
+		scanf ("%x", &num);
+		printf ("O valor em decimal eh %d", num);
+	}
+	if(menu==4)
+	{
+		int(num);
+		printf ("Digite o numero em hexadecimal: ");
+		scanf ("%x", &num);
+		dpbi(num);
+	}
+	if(menu==5)
+	{
+		int(num);
+		printf ("Digite o numero em decimal: ");
+		scanf("%d", &num);
+		dpbi(num);
+	}
+	if(menu==6)
+	{
+		int(num);
+		printf ("Digite o numero em decimal: ");
+		scanf("%d", &num);
+		printf ("O valor em hexadecimal eh %x", num);
+	}
+	if(menu==7)
+	{
+		int(num);
+		printf ("Digite o numero em octal: ");
+		scanf("%o", &num);
+		printf("O valor em decimal eh %d", num);
+	}		
+	if(menu==8)
+	{
+		int(num);
+		printf ("Digite o numero em decimal: ");
+		scanf("%d", &num);
+		printf ("O valor em octal eh %o", num);
 	}
 	return 0;
 }
